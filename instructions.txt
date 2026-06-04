@@ -1,0 +1,144 @@
+Final Proje Ödevi: Java MVC ve JSTL ile Temel E-Ticaret Portalı
+1. Projenin Amacı
+Bu proje kapsamında öğrencilerden Java tabanlı MVC mimarisi kullanarak temel düzeyde çalışan bir e-ticaret sistemi geliştirmeleri beklenmektedir. Uygulamada kullanıcıların ürünleri görüntüleyebilmesi, sepete ürün ekleyebilmesi ve sipariş oluşturabilmesi; yönetici panelinde ise ürün, kategori ve sipariş yönetimi yapılabilmesi amaçlanmaktadır.
+Proje özellikle aşağıdaki konuların uygulanmasını hedefler:
+Java Servlet kullanımı  JSP sayfaları ile arayüz geliştirme  JSTL ile dinamik veri gösterimi  MVC mimarisinin uygulanması  Form işlemleri  Session yönetimi  Basit kullanıcı girişi  Veritabanı işlemleri  Yönetim paneli geliştirme
+2. Kullanılacak Teknolojiler
+Projede aşağıdaki teknolojiler kullanılmalıdır:
+Java  Servlet  JSP  JSTL  HTML  CSS  Bootstrap kullanılabilir  MySQL veya PostgreSQL  JDBC  Apache Tomcat
+Spring Boot, Hibernate, JPA, React, Angular, Vue gibi ileri seviye frameworklerin kullanılması beklenmemektedir.
+3. Genel Sistem Yapısı
+Uygulama iki ana bölümden oluşacaktır:
+Kullanıcı tarafı e-ticaret portalı  Yönetici paneli
+Kullanıcı tarafında ziyaretçiler ürünleri listeleyebilecek, ürün detaylarını inceleyebilecek, sepete ürün ekleyebilecek ve sipariş oluşturabilecektir.
+Yönetici panelinde ise admin kullanıcı ürünleri, kategorileri ve siparişleri yönetebilecektir.
+4. Roller
+Sistemde iki temel kullanıcı rolü bulunacaktır:
+4.1. Müşteri / Ziyaretçi
+Ürünleri listeleyebilir.  Kategoriye göre ürünleri filtreleyebilir.  Ürün detayını görüntüleyebilir.  Sepete ürün ekleyebilir.  Sepetten ürün çıkarabilir.  Sipariş oluşturabilir.  Kayıt olabilir.  Giriş yapabilir.  Kendi siparişlerini görüntüleyebilir.
+4.2. Yönetici
+Yönetici paneline giriş yapabilir.  Kategori ekleyebilir, güncelleyebilir, silebilir.  Ürün ekleyebilir, güncelleyebilir, silebilir.  Ürün stok bilgisini yönetebilir.  Siparişleri listeleyebilir.  Sipariş durumunu güncelleyebilir.  Kullanıcıları görüntüleyebilir.
+5. Kullanıcı Tarafı İsterleri
+5.1. Ana Sayfa
+Ana sayfada sistemde kayıtlı aktif ürünler listelenmelidir.
+Her ürün için aşağıdaki bilgiler gösterilmelidir:
+Ürün adı  Ürün fiyatı  Ürün görseli  Kısa açıklama  Stok durumu  Detay butonu  Sepete ekle butonu
+Ürünler JSTL <c:forEach> etiketi kullanılarak listelenmelidir.
+5.2. Kategoriye Göre Ürün Listeleme
+Kullanıcılar ürünleri kategoriye göre filtreleyebilmelidir.
+Örneğin:
+Telefon  Bilgisayar  Aksesuar  Kitap  Giyim
+Kategori seçildiğinde yalnızca ilgili kategoriye ait ürünler listelenmelidir.
+5.3. Ürün Detay Sayfası
+Her ürünün detay sayfası olmalıdır.
+Bu sayfada aşağıdaki bilgiler yer almalıdır:
+Ürün adı  Ürün açıklaması  Fiyat  Stok miktarı  Kategori bilgisi  Ürün görseli  Sepete ekle butonu
+Stok miktarı 0 ise “Sepete Ekle” butonu pasif olmalı veya kullanıcıya “Stokta Yok” mesajı gösterilmelidir.
+5.4. Kullanıcı Kayıt İşlemi
+Kullanıcılar sisteme kayıt olabilmelidir.
+Kayıt formunda aşağıdaki alanlar bulunmalıdır:
+Ad soyad  E-posta  Şifre  Telefon  Adres
+E-posta adresi sistemde daha önce kayıtlı ise kullanıcıya hata mesajı gösterilmelidir.
+5.5. Kullanıcı Giriş İşlemi
+Kullanıcı e-posta ve şifre ile sisteme giriş yapabilmelidir.
+Başarılı giriş sonrası kullanıcı session’da tutulmalıdır.
+Giriş yapmamış kullanıcı sipariş oluşturmak istediğinde giriş sayfasına yönlendirilmelidir.
+5.6. Sepet İşlemleri
+Kullanıcı ürünleri sepete ekleyebilmelidir.
+Sepet session üzerinde tutulabilir.
+Sepet sayfasında aşağıdaki bilgiler gösterilmelidir:
+Ürün adı  Birim fiyat  Adet  Ara toplam  Genel toplam  Sepetten çıkar butonu  Adet güncelleme alanı
+Kullanıcı sepetteki ürün miktarını artırıp azaltabilmelidir.
+Stok miktarından fazla ürün eklenmesine izin verilmemelidir.
+5.7. Sipariş Oluşturma
+Kullanıcı sepetteki ürünlerle sipariş oluşturabilmelidir.
+Sipariş oluşturulduğunda:
+Sipariş bilgisi veritabanına kaydedilmelidir.  Sipariş ürünleri ayrıca kaydedilmelidir.  Ürün stokları azaltılmalıdır.  Sepet temizlenmelidir.  Kullanıcıya “Siparişiniz başarıyla oluşturuldu” mesajı gösterilmelidir.
+5.8. Siparişlerim Sayfası
+Giriş yapan kullanıcı kendi siparişlerini görüntüleyebilmelidir.
+Her sipariş için:
+Sipariş numarası  Sipariş tarihi  Toplam tutar  Sipariş durumu  Sipariş detay butonu
+bilgileri gösterilmelidir.
+6. Yönetim Paneli İsterleri
+6.1. Admin Giriş Sayfası
+Yönetici kullanıcı adı/e-posta ve şifre ile sisteme giriş yapabilmelidir.
+Admin olmayan kullanıcıların yönetim paneline erişimi engellenmelidir.
+6.2. Yönetim Paneli Ana Sayfası
+Admin giriş yaptıktan sonra basit bir panel ekranı görmelidir.
+Bu ekranda özet bilgiler gösterilebilir:
+Toplam ürün sayısı  Toplam kategori sayısı  Toplam kullanıcı sayısı  Toplam sipariş sayısı  Bekleyen sipariş sayısı
+6.3. Kategori Yönetimi
+Admin aşağıdaki işlemleri yapabilmelidir:
+Kategori ekleme  Kategori listeleme  Kategori güncelleme  Kategori silme
+Kategori bilgilerinde en az şu alanlar olmalıdır:
+Kategori ID  Kategori adı  Kategori açıklaması  Aktif / pasif durumu
+Bir kategoriye bağlı ürün varsa kategori doğrudan silinmemeli, pasif yapılması tercih edilmelidir.
+6.4. Ürün Yönetimi
+Admin aşağıdaki işlemleri yapabilmelidir:
+Ürün ekleme  Ürün listeleme  Ürün güncelleme  Ürün silme  Ürün aktif / pasif yapma
+Ürün bilgilerinde şu alanlar bulunmalıdır:
+Ürün ID  Ürün adı  Kategori  Açıklama  Fiyat  Stok miktarı  Ürün görsel yolu  Aktif / pasif durumu
+Ürün ekleme ve güncelleme işlemlerinde form doğrulaması yapılmalıdır.
+Örneğin:
+Ürün adı boş olamaz.  Fiyat 0’dan büyük olmalıdır.  Stok miktarı negatif olamaz.  Kategori seçilmelidir.
+6.5. Sipariş Yönetimi
+Admin tüm siparişleri listeleyebilmelidir.
+Sipariş listesinde şu bilgiler gösterilmelidir:
+Sipariş ID  Müşteri adı  Sipariş tarihi  Toplam tutar  Sipariş durumu  Detay butonu
+Admin sipariş durumunu güncelleyebilmelidir.
+Sipariş durumları örnek olarak:
+Beklemede  Hazırlanıyor  Kargoya Verildi  Tamamlandı  İptal Edildi
+6.6. Kullanıcı Yönetimi
+Admin kayıtlı kullanıcıları listeleyebilmelidir.
+Kullanıcı listesinde şu bilgiler yer almalıdır:
+Kullanıcı ID  Ad soyad  E-posta  Telefon  Rol  Kayıt tarihi
+Kullanıcı silme zorunlu değildir; sadece görüntüleme yeterlidir.
+7. Veritabanı Tabloları
+Projede en az aşağıdaki tablolar bulunmalıdır:
+users
+id  full_name  email  password  phone  address  role  created_at
+categories
+id  name  description  is_active
+products
+id  category_id  name  description  price  stock  image_url  is_active  created_at
+orders
+id  user_id  order_date  total_amount  status
+order_items
+id  order_id  product_id  quantity  unit_price  subtotal
+8. MVC Yapısı
+Proje MVC mantığına uygun şekilde geliştirilmelidir.
+Önerilen yapı:
+Model
+User  Product  Category  Order  OrderItem  CartItem
+DAO
+UserDAO  ProductDAO  CategoryDAO  OrderDAO
+Controller / Servlet
+HomeServlet  ProductServlet  CategoryServlet  CartServlet  OrderServlet  LoginServlet  RegisterServlet  AdminLoginServlet  AdminProductServlet  AdminCategoryServlet  AdminOrderServlet
+View / JSP
+index.jsp  products.jsp  product-detail.jsp  cart.jsp  login.jsp  register.jsp  my-orders.jsp  admin/dashboard.jsp  admin/products.jsp  admin/product-form.jsp  admin/categories.jsp  admin/category-form.jsp  admin/orders.jsp  admin/order-detail.jsp
+9. JSTL Kullanım Zorunluluğu
+Projede JSTL kullanımı zorunludur.
+En az aşağıdaki JSTL kullanımları beklenmektedir:
+<c:forEach> ile ürün, kategori ve sipariş listeleme  <c:if> ile stok durumu ve kullanıcı giriş kontrolü  <c:choose> ile sipariş durumuna göre farklı gösterim  <fmt:formatNumber> ile fiyat formatlama  <fmt:formatDate> ile tarih formatlama
+10. Session Kullanımı
+Projede session kullanımı zorunludur.
+Session kullanılacak yerler:
+Kullanıcı giriş bilgisi  Admin giriş bilgisi  Sepet bilgisi  Giriş yapılmadan sipariş oluşturmanın engellenmesi
+11. Form Doğrulama
+Aşağıdaki formlarda temel doğrulama yapılmalıdır:
+Kullanıcı kayıt formu  Kullanıcı giriş formu  Ürün ekleme formu  Kategori ekleme formu  Sepet adet güncelleme formu
+Doğrulama hem istemci tarafında hem de sunucu tarafında yapılabilir. Ancak sunucu tarafı kontrol zorunludur.
+12. Teslim Edilecekler
+Öğrenciler aşağıdaki çıktıları teslim etmelidir:
+ Proje kaynak kodları (github linki)  Veritabanı SQL dosyası  Kısa proje raporu 
+Kısa proje raporunda şu başlıklar bulunmalıdır:
+ Projenin amacı  Kullanılan teknolojiler  Veritabanı tasarımı  MVC mimarisi açıklaması  Ekran görüntüleri  Karşılaşılan problemler  Sonuç
+13. Değerlendirme Ölçütleri
+Toplam 100 puan üzerinden değerlendirme yapılacaktır.
+MVC mimarisinin doğru uygulanması: 15 puan  Servlet, JSP ve JSTL kullanımı: 15 puan  Veritabanı tasarımı ve JDBC işlemleri: 15 puan  Kullanıcı tarafı e-ticaret işlemleri: 20 puan  Yönetim paneli işlemleri: 20 puan  Arayüz düzeni ve kullanılabilirlik: 5 puan  Rapor ve teslim düzeni: 10 puan
+14. Ek Özellikler
+Aşağıdaki özellikler zorunlu değildir, ancak ek puan olarak değerlendirilebilir:
+Ürün arama özelliği  Ürün görsel yükleme  Admin panelinde grafiksel özet  Sipariş durumuna göre renkli gösterim  Şifrelerin hashlenerek saklanması  Sayfalama sistemi  Basit ürün favorileme sistemi
+15. Önemli Notlar
+Hazır e-ticaret sistemleri kullanılmamalıdır.  Proje bireysel veya grup çalışması olarak verilebilir.  Kodlar öğrencinin kendisi tarafından yazılmalıdır.  Veritabanı bağlantı bilgileri ayrı bir yapılandırma dosyasında tutulabilir.  Uygulama Tomcat üzerinde çalıştırılabilir olmalıdır.  Tüm listeleme işlemlerinde JSTL kullanımı beklenmektedir.  Yönetim paneline sadece admin rolündeki kullanıcı erişebilmelidir.
+
